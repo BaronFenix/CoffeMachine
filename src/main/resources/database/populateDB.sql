@@ -30,3 +30,20 @@ BEGIN
     END IF;
 END;
 ' LANGUAGE PLPGSQL;
+
+
+DO
+'
+DECLARE 
+BEGIN
+    IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = ''ingredients'') THEN
+        IF NOT EXISTS (SELECT * FROM ingredients) THEN
+            INSERT INTO ingredients (name, value, max_limit)
+            VALUES 
+                (''Кофе'', 500, 3000),
+                (''Молоко'', 500, 5000),
+                (''Вода'', 1000, 10000);
+        END IF;
+    END IF;
+END;
+' LANGUAGE PLPGSQL;
